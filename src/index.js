@@ -372,7 +372,7 @@ root.render(<Clock />);
 因此它们被称为生命周期方法。
 */
 
-
+/*
 class Clock extends React.Component {
   constructor(props) {
     super(props);
@@ -411,7 +411,7 @@ class Clock extends React.Component {
   }
 }
 root.render(<Clock />);
-
+*/
 
 /*
 现在时钟每秒都会刷新。
@@ -514,22 +514,24 @@ function FormattedDate(props) {
 
 // 事件处理
 
-function Form() {
-  function handleSubmit(e) {
-    e.preventDefault();
+// function Form() {
+//   function handleSubmit(e) {
+//     e.preventDefault();
 
-    console.log('You clicked submit.');
-  }
+//     console.log('You clicked submit.');
+//   }
 
 
-  return (
-    <form onSubmit={(event) => handleSubmit(event)}>
-      {/* <form onSubmit={handleSubmit}> */}
-      <button type="submit">Submit</button>
-    </form>
-  );
-}
+//   return (
+//     <form onSubmit={(event) => handleSubmit(event)}>
+//       {/* <form onSubmit={handleSubmit}> */}
+//       <button type="submit">Submit</button>
+//     </form>
+//   );
+// }
 
+
+/*
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
@@ -574,7 +576,7 @@ class LoggingButton extends React.Component {
     );
   }
 }
-
+*/
 // 向事件处理程序传递参数
 /*
 <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
@@ -597,6 +599,7 @@ React 中的条件渲染和 JavaScript 中的一样，
 例如下面两个组件
 */
 
+/*
 function UserGreeting(props) {
   return <h1>You have successfully logined,Welcome back!</h1>;
 }
@@ -615,6 +618,7 @@ function Greeting(props) {
 
 root.render(<Greeting isLoggedIn={false} />);
 
+*/
 
 //元素变量
 
@@ -622,6 +626,7 @@ root.render(<Greeting isLoggedIn={false} />);
 //它可以帮助你有条件地渲染组件的一部分，而其他的渲染部分并不会因此而改变。
 
 //例如下面两个组件，分别代表了登陆和登出按钮
+/*
 function LoginButton(props) {
   return (
     <button onClick={props.onClick}>
@@ -637,6 +642,7 @@ function LogoutButton(props) {
     </button>
   );
 }
+*/
 /*
 在下面的示例中，我们将创建一个名叫 LoginControl 的有状态的组件。
 它将根据当前的状态来渲染 <LoginButton /> 或者 <LogoutButton />。
@@ -644,64 +650,64 @@ function LogoutButton(props) {
 */
 
 
-class LoginControl extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);//绑定登陆按钮
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);//绑定登出按钮
-    this.state = { isLoggedIn: false };
-  }
+// class LoginControl extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.handleLoginClick = this.handleLoginClick.bind(this);//绑定登陆按钮
+//     this.handleLogoutClick = this.handleLogoutClick.bind(this);//绑定登出按钮
+//     this.state = { isLoggedIn: false };
+//   }
 
-  handleLoginClick() {
-    this.setState({ isLoggedIn: true });
-  }
+//   handleLoginClick() {
+//     this.setState({ isLoggedIn: true });
+//   }
 
-  handleLogoutClick() {
-    this.setState({ isLoggedIn: false });
-  }
+//   handleLogoutClick() {
+//     this.setState({ isLoggedIn: false });
+//   }
 
-  render() {
-    const isLoggedIn = this.state.isLoggedIn;
-    let button;
-    if (isLoggedIn) {
-      button = <LogoutButton onClick={this.handleLogoutClick} />;
-    } else {
-      button = <LoginButton onClick={this.handleLoginClick} />;
-    }
+//   render() {
+//     const isLoggedIn = this.state.isLoggedIn;
+//     let button;
+//     if (isLoggedIn) {
+//       button = <LogoutButton onClick={this.handleLogoutClick} />;
+//     } else {
+//       button = <LoginButton onClick={this.handleLoginClick} />;
+//     }
 
-    return (
-      <div>
-        <Greeting isLoggedIn={isLoggedIn} />
-        {button}
-      </div>
-    );
-  }
-}
-// root.render(<LoginControl />);
+//     return (
+//       <div>
+//         <Greeting isLoggedIn={isLoggedIn} />
+//         {button}
+//       </div>
+//     );
+//   }
+// }
+// // root.render(<LoginControl />);
 
-function Mailbox(props) {
-  const unreadMessages = props.unreadMessages;
-  return (
-    <div>
-      <h1>Hello!</h1>
-      //如果unreadMessages数组中有元素,就显示后面的内容
-      {unreadMessages.length > 0 &&
-        <h2>
-          You have {unreadMessages.length} unread messages.
-        </h2>
-      }
-    </div>
-    /*
-之所以能这样做，是因为在 JavaScript 中，true && expression 总是会返回 expression,
-而 false && expression 总是会返回 false。
-因此，如果条件是 true，&& 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。
-请注意，falsy 表达式 会使 && 后面的元素被跳过，但会返回 falsy 表达式的值。
-在下面示例中，render 方法的返回值是 <div>0</div>。
-    */
-  );
-}
+// function Mailbox(props) {
+//   const unreadMessages = props.unreadMessages;
+//   return (
+//     <div>
+//       <h1>Hello!</h1>
+//       //如果unreadMessages数组中有元素,就显示后面的内容
+//       {unreadMessages.length > 0 &&
+//         <h2>
+//           You have {unreadMessages.length} unread messages.
+//         </h2>
+//       }
+//     </div>
+//     /*
+// 之所以能这样做，是因为在 JavaScript 中，true && expression 总是会返回 expression,
+// 而 false && expression 总是会返回 false。
+// 因此，如果条件是 true，&& 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。
+// 请注意，falsy 表达式 会使 && 后面的元素被跳过，但会返回 falsy 表达式的值。
+// 在下面示例中，render 方法的返回值是 <div>0</div>。
+//     */
+//   );
+// }
 
-const messages = ['React', 'Re: React', 'Re:Re: React'];
+// const messages = ['React', 'Re: React', 'Re:Re: React'];
 
 
 // root.render(<Mailbox unreadMessages={messages} />);
@@ -730,45 +736,219 @@ render() {
 下面的示例中，<WarningBanner /> 会根据 prop 中 warn 的值来进行条件渲染。如果 warn 的值是 false，那么组件则不会渲染:
 */
 
-function WarningBanner(props) {
-  if (!props.warn) {
-    return null;
-  }
+// function WarningBanner(props) {
+//   if (!props.warn) {
+//     return null;
+//   }
 
+//   return (
+//     <div className="warning">
+//       Warning!
+//     </div>
+//   );
+// }
+
+// class Page extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {showWarning: true};
+//     this.handleToggleClick = this.handleToggleClick.bind(this);
+//   }
+
+//   handleToggleClick() {
+//     this.setState(state => ({
+//       showWarning: !state.showWarning
+//     }));
+//   }
+
+//   render() {
+//     return (
+//       <div>
+//         <WarningBanner warn={this.state.showWarning} />
+//         {/* 如果warn为false，则该组件不会被渲染 */}
+//         <button onClick={this.handleToggleClick}>
+//           {this.state.showWarning ? 'Hide' : 'Show'}
+//         </button>
+//       </div>
+//     );
+//   }
+// }
+
+// root.render(<Page />);
+
+// 列表 & Key In React
+
+
+// 首先，让我们看下在 Javascript 中如何转化列表。
+
+//如下代码，我们使用 map() 函数让数组中的每一项变双倍
+//然后我们得到了一个新的列表 doubled 并打印出来：
+
+
+// const numbers = [1, 2, 3, 4, 5];
+// const doubled = numbers.map((number) => number * 2);
+// console.log(doubled);
+
+//代码打印出 [2, 4, 6, 8, 10]。
+//在 React 中，把数组转化为元素列表的过程是相似的。
+
+//渲染多个组件
+
+/*
+你可以通过使用 {} 在 JSX 内构建一个元素集合。
+下面，我们使用 Javascript 中的 map() 方法来遍历 numbers 数组。
+将数组中的每个元素变成 <li> 标签，最后我们将得到的数组赋值给 listItems：
+*/
+
+// const numbers = [1, 2, 3, 4, 5];
+// const listItems = numbers.map((number) =>
+//   <li>{number}</li>
+// );
+
+// root.render(<ul>{listItems}</ul>);
+
+/*
+output
+
+· 1
+· 2
+· 3
+· 4
+· 5
+
+在运行上面的代码时会有一个警告，提示说没有加key
+
+改进方法如下
+*/
+
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) =>
+  <li key={number.toString()}>{number}</li>
+);
+
+root.render(<ul>{listItems}</ul>);
+
+// Key
+
+/*
+key 帮助 React 识别哪些元素改变了，比如被添加或删除。
+因此你应当给数组中的每一个元素赋予一个确定的标识。
+
+一个元素的 key 最好是这个元素在列表中拥有的一个独一无二的字符串。
+通常，我们使用数据中的 id 来作为元素的 key：
+
+当元素没有确定 id 的时候，不得已你可以使用元素索引 index 作为 key：
+
+const listItems = numbers.map((number) =>
+  <li key={index}>{number}</li>
+);
+
+
+
+元素的 key 只有放在就近的数组上下文中才有意义。
+比方说，如果你提取出一个 ListItem 组件
+你应该把 key 保留在数组中的这个 <ListItem /> 元素上
+而不是放在 ListItem 组件中的 <li> 元素上。
+
+//例子：不正确的使用 key 的方式
+
+
+function ListItem(props) {
+  const value = props.value;
   return (
-    <div className="warning">
-      Warning!
-    </div>
+    // 错误！你不需要在这里指定 key：
+    <li key={value.toString()}>
+      {value}
+    </li>
   );
 }
 
-class Page extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {showWarning: true};
-    this.handleToggleClick = this.handleToggleClick.bind(this);
-  }
-
-  handleToggleClick() {
-    this.setState(state => ({
-      showWarning: !state.showWarning
-    }));
-  }
-
-  render() {
-    return (
-      <div>
-        <WarningBanner warn={this.state.showWarning} />
-        {/* 如果warn为false，则该组件不会被渲染 */}
-        <button onClick={this.handleToggleClick}>
-          {this.state.showWarning ? 'Hide' : 'Show'}
-        </button>
-      </div>
-    );
-  }
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    // 错误！元素的 key 不能这样指定：
+    <ListItem value={number} />
+  );
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
 }
 
-root.render(<Page />);
+//正确的使用key的方式
+
+function ListItem(props) {
+  // 正确！这里不需要指定 key：
+  return <li>{props.value}</li>;
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    // 正确！key 应该在数组的上下文中被指定
+    <ListItem key={number.toString()} value={number} />
+  );
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
+}
+
+*/
+
+/*
+Tips:key 值在兄弟节点之间必须唯一
+
+数组元素中使用的 key 在其兄弟节点之间应该是独一无二的。
+然而，它们不需要是全局唯一的。
+当我们生成两个不同的数组时，我们可以使用相同的 key 值：
+
+
+key 会传递信息给 React ，但不会传递给你的组件。
+如果你的组件中需要使用 key 属性的值，请用其他属性名显式传递这个值：
+
+const content = posts.map((post) =>
+  <Post
+    key={post.id}
+    id={post.id}
+    title={post.title} />
+);
+
+
+在 JSX 中嵌入 map()
+
+在上面的例子中，我们声明了一个单独的 listItems 变量并将其包含在 JSX 中：
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <ListItem key={number.toString()}
+              value={number} />
+  );
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
+}
+
+JSX 允许在大括号中嵌入任何表达式，所以我们可以内联 map() 返回的结果：
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  return (
+    <ul>
+      {numbers.map((number) =>
+        <ListItem key={number.toString()}
+                  value={number} />
+      )}
+    </ul>
+  );
+}
+
+*/
 
 
 // If you want to start measuring performance in your app, pass a function
