@@ -583,9 +583,192 @@ class LoggingButton extends React.Component {
 (前者用的更多
  */
 
+//条件渲染
 
-  
 
+//在 React 中，你可以创建不同的组件来封装各种你需要的行为。
+//然后，依据应用的不同状态，你可以只渲染对应状态下的部分内容。
+
+/*
+React 中的条件渲染和 JavaScript 中的一样，
+使用 JavaScript 运算符 if 或者条件运算符去创建元素来表现当前的状态，
+然后让 React 根据它们来更新 UI。
+
+例如下面两个组件
+*/
+
+function UserGreeting(props) {
+  return <h1>You have successfully logined,Welcome back!</h1>;
+}
+
+function GuestGreeting(props) {
+  return <h1>Hello Guest,Please sign up then login.</h1>;
+}
+
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+root.render(<Greeting isLoggedIn={false} />);
+
+
+//元素变量
+
+//你可以使用变量来储存元素。 
+//它可以帮助你有条件地渲染组件的一部分，而其他的渲染部分并不会因此而改变。
+
+//例如下面两个组件，分别代表了登陆和登出按钮
+function LoginButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Login
+    </button>
+  );
+}
+
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
+  );
+}
+/*
+在下面的示例中，我们将创建一个名叫 LoginControl 的有状态的组件。
+它将根据当前的状态来渲染 <LoginButton /> 或者 <LogoutButton />。
+同时它还会渲染上一个示例中的 <Greeting />。
+*/
+
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);//绑定登陆按钮
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);//绑定登出按钮
+    this.state = { isLoggedIn: false };
+  }
+
+  handleLoginClick() {
+    this.setState({ isLoggedIn: true });
+  }
+
+  handleLogoutClick() {
+    this.setState({ isLoggedIn: false });
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+    }
+
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    );
+  }
+}
+// root.render(<LoginControl />);
+
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <h1>Hello!</h1>
+      //如果unreadMessages数组中有元素,就显示后面的内容
+      {unreadMessages.length > 0 &&
+        <h2>
+          You have {unreadMessages.length} unread messages.
+        </h2>
+      }
+    </div>
+    /*
+之所以能这样做，是因为在 JavaScript 中，true && expression 总是会返回 expression,
+而 false && expression 总是会返回 false。
+因此，如果条件是 true，&& 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。
+请注意，falsy 表达式 会使 && 后面的元素被跳过，但会返回 falsy 表达式的值。
+在下面示例中，render 方法的返回值是 <div>0</div>。
+    */
+  );
+}
+
+const messages = ['React', 'Re: React', 'Re:Re: React'];
+
+
+// root.render(<Mailbox unreadMessages={messages} />);
+
+
+// 三目运算符
+
+//另一种内联条件渲染的方法是使用 JavaScript 中的三目运算符 condition ? true : false。
+
+/*
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  return (
+    <div>
+      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+    </div>
+  );
+}
+*/
+
+
+//阻止组件渲染
+
+/*
+在极少数情况下，你可能希望能隐藏组件，即使它已经被其他组件渲染。若要完成此操作，你可以让 render 方法直接返回 null，而不进行任何渲染。
+下面的示例中，<WarningBanner /> 会根据 prop 中 warn 的值来进行条件渲染。如果 warn 的值是 false，那么组件则不会渲染:
+*/
+
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showWarning: true};
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <WarningBanner warn={this.state.showWarning} />
+        {/* 如果warn为false，则该组件不会被渲染 */}
+        <button onClick={this.handleToggleClick}>
+          {this.state.showWarning ? 'Hide' : 'Show'}
+        </button>
+      </div>
+    );
+  }
+}
+
+root.render(<Page />);
 
 
 // If you want to start measuring performance in your app, pass a function
