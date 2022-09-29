@@ -1,16 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import { HelloWorld } from './App';
-import reportWebVitals from './reportWebVitals';
+import { Button, DatePicker } from 'antd';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+// import { Button, Switch } from '@douyinfe/semi-ui';
+// import { Button, DatePicker } from 'antd';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <HelloWorld />
-//   </React.StrictMode>
+// const App1 = () => (
+//   <>
+//     <Button type='primary'>primary button</Button>
+//     <Switch size='large' />
+//   </>
 // );
+
+
+const App1 = () => (
+  <>
+    <Button type="primary">PRESS ME</Button>
+    <DatePicker placeholder="select date" />
+  </>
+);
+
+root.render(<App1 />);
+
 
 /*
 
@@ -38,9 +51,9 @@ setInterval(tick, 1000);
 
 // 函数组件与class组件
 // 函数组件=> 函数组件是一个纯函数，接收props作为参数，返回一个React元素，是定义组件最简单的方式
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
+// function Welcome(props) {
+//   return <h1>Hello, {props.name}</h1>;
+// }
 
 /*
 该函数是一个有效的 React 组件，因为它接收唯一带有数据的 “props”（代表属性）对象与并返回一个 React 元素。
@@ -821,12 +834,12 @@ output
 改进方法如下
 */
 
-const numbers = [1, 2, 3, 4, 5];
-const listItems = numbers.map((number) =>
-  <li key={number.toString()}>{number}</li>
-);
+// const numbers = [1, 2, 3, 4, 5];
+// const listItems = numbers.map((number) =>
+//   <li key={number.toString()}>{number}</li>
+// );
 
-root.render(<ul>{listItems}</ul>);
+// root.render(<ul>{listItems}</ul>);
 
 // Key
 
@@ -954,4 +967,13 @@ function NumberList(props) {
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
+
+
+
+// import React from 'react';
+// import ReactDOM from 'react-dom/client';
+// import { Button, Switch } from '@douyinfe/semi-ui';
+
+
+// ReactDOM.render(<App />, document.querySelector('#app'));
