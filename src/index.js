@@ -433,7 +433,83 @@ root.render(<Clock />);
 5. 一旦 Clock 组件从 DOM 中被移除，React 就会调用 componentWillUnmount() 生命周期方法，这样计时器就停止了。
 */
 
+// Tips: 正确地使用State
 
+/*
+1. 不要直接修改 State
+
+修改State并不会重新渲染组件
+
+应该使用setState()方法来修改State
+如this.setState({comment: 'Hello'});
+
+构造函数是唯一可以给 this.state 赋值的地方。
+
+2. State 的更新可能是异步的
+
+React 可能会把多个 setState() 调用合并成一个调用。
+
+因为 this.props 和 this.state 可能会异步更新，所以你不要依赖他们的值来更新下一个状态。
+
+例如，此代码可能会无法更新计数器：
+
+// 错误的
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+
+// 正确的
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+
+3. State 的更新会被合并
+当你调用 setState() 的时候，React 会把你提供的对象合并到当前的 state。
+例如，你的 state 包含几个独立的变量：
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      comments: []
+    };
+  }
+
+
+然后你可以分别调用setState()来单独地更新它们：
+    componentDidMount() {
+    fetchPosts().then(response => {
+      this.setState({
+        posts: response.posts
+      });
+    });
+
+    fetchComments().then(response => {
+      this.setState({
+        comments: response.comments
+      });
+    });
+  }
+
+这里的合并是浅合并，所以 this.setState({comments}) 完整保留了 this.state.posts
+但是完全替换了 this.state.comments。
+
+4. 数据是向下流动的
+
+不管是父组件或是子组件都无法知道某个组件是有状态的还是无状态的，并且它们也并不关心它是函数组件还是 class 组件。
+这就是为什么称 state 为局部的或是封装的的原因。除了拥有并设置了它的组件，其他组件都无法访问。
+组件可以选择把它的 state 作为 props 向下传递到它的子组件中：
+
+<FormattedDate date={this.state.date} />
+
+FormattedDate 组件会在其 props 中接收参数 date
+但是组件本身无法知道它是来自于 Clock 的 state，或是 Clock 的 props，还是手动输入的：
+
+function FormattedDate(props) {
+  return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+}
+
+*/
 
 
 
