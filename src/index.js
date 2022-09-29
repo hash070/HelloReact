@@ -512,6 +512,81 @@ function FormattedDate(props) {
 */
 
 
+// 事件处理
+
+function Form() {
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    console.log('You clicked submit.');
+  }
+
+
+  return (
+    <form onSubmit={(event) => handleSubmit(event)}>
+      {/* <form onSubmit={handleSubmit}> */}
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+
+    // 为了在回调中使用 `this`，这个绑定是必不可少的
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // this.setState(prevState => ({
+    //   isToggleOn: !prevState.isToggleOn
+    // }));
+
+    // OR
+
+    let isTO = !this.state.isToggleOn
+    this.setState({ isToggleOn: isTO })
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+
+// root.render(<Toggle />);
+
+class LoggingButton extends React.Component {
+  // This syntax ensures `this` is bound within handleClick.
+  handleClick = () => {
+    console.log('this is:', this);
+  };
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        Click me
+      </button>
+    );
+  }
+}
+
+// 向事件处理程序传递参数
+/*
+<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+<button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+
+(前者用的更多
+ */
+
+
+  
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
